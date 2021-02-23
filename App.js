@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import plot from './utils/plot';
+import * as Linking from 'expo-linking';
 
 export default function App() {
   const [node, setNode] = React.useState(0);
@@ -25,6 +26,10 @@ export default function App() {
       getCurrentNode();
   }
 
+  function githubLink() {
+    Linking.openURL('https://github.com/ethanrmcdowell/choose-adventure-rn');
+  }
+
   const AppButton = ({ onPress, title }) => (
     <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.appButtonContainer}>
       <Text style={styles.appButtonText}>{title}</Text>
@@ -33,9 +38,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{padding: 20, color: 'white', fontSize: 30}}>{currentNode.title}</Text>
+      <Text style={{padding: 20, color: 'pink', fontSize: 30}}>{currentNode.title}</Text>
       <Text style={{padding: 20, color: 'white'}}>{currentNode.content}</Text>
-      {currentNode.choices.map(choice => <AppButton style={styles.button} title={choice.text} onPress={() => onPress(choice)} /> )}
+      {currentNode.choices.map(choice => <AppButton key={currentNode.id + choice.target} style={styles.button} title={choice.text} onPress={() => onPress(choice)} /> )}
+      <Text style={{marginTop: '50%', padding: 20, color: 'pink', fontSize: 20}} onPress={githubLink} justifyContent='top'>Check out our GitHub!</Text>
     </View>
   );
 }
@@ -51,7 +57,7 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 10,
     elevation: 8,
-    backgroundColor: "white",
+    backgroundColor: "pink",
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12
