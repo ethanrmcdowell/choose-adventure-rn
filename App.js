@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, Button, TouchableOpacity, YellowBox } from 'react-native';
 import plot from './utils/plot';
 import * as Linking from 'expo-linking';
 
@@ -38,10 +38,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{padding: 20, color: 'pink', fontSize: 30}}>{currentNode.title}</Text>
-      <Text style={{padding: 20, color: 'white'}}>{currentNode.content}</Text>
-      {currentNode.choices.map(choice => <AppButton key={currentNode.id + choice.target} style={styles.button} title={choice.text} onPress={() => onPress(choice)} /> )}
-      <Text style={{marginTop: '50%', padding: 20, color: 'pink', fontSize: 20}} onPress={githubLink} justifyContent='top'>Check out our GitHub!</Text>
+      <ImageBackground source={require("./assets/main_bg.jpg")} style={styles.backgroundImage}>
+        <View style={styles.textbox}>
+          <Text style={{padding: 20, color: 'pink', fontSize: 30}}>{currentNode.title}</Text>
+          <Text style={{padding: 20, color: 'white'}}>{currentNode.content}</Text>
+          {currentNode.choices.map(choice => <AppButton key={currentNode.id + choice.target} title={choice.text} onPress={() => onPress(choice)} /> )}
+        </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -49,22 +52,39 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
-    alignItems: 'center',
-    justifyContent: 'center',
+    elevation: 5
   },
   appButtonContainer: {
-    width: 300,
     marginTop: 10,
     elevation: 8,
-    backgroundColor: "pink",
-    borderRadius: 10,
+    backgroundColor: "black",
     paddingVertical: 10,
-    paddingHorizontal: 12
+    paddingHorizontal: 12,
+    borderBottomWidth: 5,
+    borderBottomColor: "#36dede",
+    borderRadius: 30
+
   },
   appButtonText: {
     fontSize: 18,
-    color: "black",
+    color: "white",
+    alignSelf: "center"
+  },
+  backgroundImage: {
+    flex: 1
+  },
+  textbox: {
+    padding: 7,
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: "#7F0EEF",
+    borderRadius: 20,
+    marginTop: "25%",
+    backgroundColor: "#503D88",
+    width: "75%",
+    maxHeight: "98%",
+    minHeight: "55%",
+    justifyContent: "center",
     alignSelf: "center"
   }
 });

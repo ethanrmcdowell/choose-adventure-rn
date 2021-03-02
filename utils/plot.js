@@ -629,7 +629,7 @@ const plot = [
     choices: [
       {
         text: "Play Again",
-        target: 41,
+        target: 0,
       },
     ],
   },
@@ -642,7 +642,7 @@ const plot = [
     choices: [
       {
         text: "The end",
-        target: 41,
+        target: 0,
       },
     ],
   },
